@@ -1,15 +1,16 @@
 import express from "express";
-const path = require("path");
-app.use(express.static(path.join(__dirname, "public")));
+import path from "path";
+import { fileURLToPath } from "url";
 import { checkEnvironment } from "./checkEnvironment.js";
 import { giftController } from "./controllers/giftController.js";
 
 import cors from "cors";
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 //End of added code
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 checkEnvironment();
 
 app.post("/api/gift", giftController);
